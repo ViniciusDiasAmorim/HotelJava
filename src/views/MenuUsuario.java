@@ -105,7 +105,7 @@ public class MenuUsuario extends JFrame {
 		panelMenu.add(btnBuscar);
 
 		JLabel lblBusquedaDeReservas = new JLabel("Buscar");
-		lblBusquedaDeReservas.setIcon(new ImageIcon(MenuUsuario.class.getResource("/imagenes/pessoas.png")));
+		lblBusquedaDeReservas.setIcon(new ImageIcon(MenuUsuario.class.getResource("/imagens/pessoas.png")));
 		lblBusquedaDeReservas.setBounds(30, 11, 200, 34);
 		lblBusquedaDeReservas.setHorizontalAlignment(SwingConstants.LEFT);
 		lblBusquedaDeReservas.setForeground(Color.WHITE);
@@ -142,7 +142,7 @@ public class MenuUsuario extends JFrame {
 		btnRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
 		labelRegistro = new JLabel("Registro de reservas");
-		labelRegistro.setIcon(new ImageIcon(MenuUsuario.class.getResource("/imagenes/reservado.png")));
+		labelRegistro.setIcon(new ImageIcon(MenuUsuario.class.getResource("/imagens/reservado.png")));
 		labelRegistro.setForeground(SystemColor.text);
 		labelRegistro.setBounds(25, 11, 205, 34);
 		labelRegistro.setFont(new Font("Roboto", Font.PLAIN, 18));

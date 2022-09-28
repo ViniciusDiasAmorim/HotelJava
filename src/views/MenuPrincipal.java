@@ -63,7 +63,7 @@ public class MenuPrincipal extends JFrame {
 		
 		JLabel imagenFondo = new JLabel("");
 		imagenFondo.setBounds(-50, 0, 732, 501);
-		imagenFondo.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagenes/menu-img.png")));
+		imagenFondo.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagens/menu-img.png")));
 		panel.add(imagenFondo);
 		
 		JLabel logo = new JLabel("");
@@ -152,7 +152,7 @@ public class MenuPrincipal extends JFrame {
 		imageLogin.setBounds(0, 0, 80, 70);
 		btnLogin.add(imageLogin);
 		imageLogin.setHorizontalAlignment(SwingConstants.CENTER);
-		imageLogin.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagenes/login.png")));
+		imageLogin.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagens/login.png")));
 		
 		JLabel lblTitulo = new JLabel("LOGIN");
 		lblTitulo.setBounds(754, 265, 83, 24);

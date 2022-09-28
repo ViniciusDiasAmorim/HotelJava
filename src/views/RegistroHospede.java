@@ -178,7 +178,7 @@ public class RegistroHospede extends JFrame {
 		txtDataN = new JDateChooser();
 		txtDataN.setBounds(560, 278, 285, 36);
 		txtDataN.getCalendarButton()
-				.setIcon(new ImageIcon(RegistroHospede.class.getResource("/imagenes/icon-reservas.png")));
+				.setIcon(new ImageIcon(RegistroHospede.class.getResource("/imagens/icon-reservas.png")));
 		txtDataN.getCalendarButton().setBackground(SystemColor.textHighlight);
 		txtDataN.setDateFormatString("yyyy-MM-dd");
 		contentPane.add(txtDataN);
@@ -351,7 +351,7 @@ public class RegistroHospede extends JFrame {
 		JLabel imageFundo = new JLabel("");
 		imageFundo.setBounds(0, 121, 479, 502);
 		panel.add(imageFundo);
-		imageFundo.setIcon(new ImageIcon(RegistroHospede.class.getResource("/imagenes/registro.png")));
+		imageFundo.setIcon(new ImageIcon(RegistroHospede.class.getResource("/imagens/registro.png")));
 
 		JLabel logo = new JLabel("");
 		logo.setBounds(194, 39, 104, 107);

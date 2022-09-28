@@ -105,7 +105,7 @@ public class ReservasView extends JFrame {
 		txtDataE = new JDateChooser();
 		txtDataE.getCalendarButton().setBackground(SystemColor.textHighlight);
 		txtDataE.getCalendarButton()
-				.setIcon(new ImageIcon(ReservasView.class.getResource("/imagenes/icon-reservas.png")));
+				.setIcon(new ImageIcon(ReservasView.class.getResource("/imagens/icon-reservas.png")));
 		txtDataE.getCalendarButton().setFont(new Font("Roboto", Font.PLAIN, 12));
 		txtDataE.setBounds(68, 161, 289, 35);
 		txtDataE.getCalendarButton().setBounds(268, 0, 21, 33);
@@ -137,7 +137,7 @@ public class ReservasView extends JFrame {
 
 		txtDataS = new JDateChooser();
 		txtDataS.getCalendarButton()
-				.setIcon(new ImageIcon(ReservasView.class.getResource("/imagenes/icon-reservas.png")));
+				.setIcon(new ImageIcon(ReservasView.class.getResource("/imagens/icon-reservas.png")));
 		txtDataS.getCalendarButton().setFont(new Font("Roboto", Font.PLAIN, 11));
 		txtDataS.setBounds(68, 246, 289, 35);
 		txtDataS.getCalendarButton().setBounds(267, 1, 21, 31);
@@ -211,7 +211,7 @@ public class ReservasView extends JFrame {
 		imagenFondo.setBounds(0, 140, 500, 409);
 		panel_1.add(imagenFondo);
 		imagenFondo.setBackground(Color.WHITE);
-		imagenFondo.setIcon(new ImageIcon(ReservasView.class.getResource("/imagenes/reservas-img-3.png")));
+		imagenFondo.setIcon(new ImageIcon(ReservasView.class.getResource("/imagens/reservas-img-3.png")));
 
 		JPanel btnexit = new JPanel();
 		btnexit.addMouseListener(new MouseAdapter() {

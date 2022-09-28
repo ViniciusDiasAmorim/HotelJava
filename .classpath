@@ -6,13 +6,12 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/User/Desktop/HotelJava/src/JARS/c3p0-0.9.5.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/User/Desktop/HotelJava/src/JARS/mchange-commons-java-0.2.16.jar"/>
-	<classpathentry kind="lib" path="C:/Users/User/Desktop/HotelJava/src/JARS/mysql-connector-java-8.0.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/User/Desktop/HotelJava/src/JARS/jcalendar-1.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/User/Desktop/HotelJava/src/JARS/jcalendar-1.4/lib/jcalendar-1.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/User/Desktop/HotelJava/src/JARS/jcalendar-1.4/lib/jgoodies-common-1.2.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/User/Desktop/HotelJava/src/JARS/jcalendar-1.4/lib/jgoodies-looks-2.4.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/User/Desktop/HotelJava/src/JARS/jcalendar-1.4/lib/junit-4.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/Programação/0.0 Portfolio/HotelJava/src/JARS/c3p0-0.9.5.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/Programação/0.0 Portfolio/HotelJava/src/JARS/mchange-commons-java-0.2.16.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/Programação/0.0 Portfolio/HotelJava/src/JARS/mysql-connector-java-8.0.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/Programação/0.0 Portfolio/HotelJava/jcalendar-1.4/lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/Programação/0.0 Portfolio/HotelJava/jcalendar-1.4/lib/jgoodies-common-1.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/Programação/0.0 Portfolio/HotelJava/jcalendar-1.4/lib/jgoodies-looks-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/Programação/0.0 Portfolio/HotelJava/jcalendar-1.4/lib/junit-4.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
