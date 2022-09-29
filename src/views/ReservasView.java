@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.sql.Connection;
+import java.math.BigDecimal;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 
@@ -28,8 +28,8 @@ import javax.swing.border.LineBorder;
 
 import com.toedter.calendar.JDateChooser;
 
-import dao.ReservaDAO;
-import factory.ConnectionFactory;
+import controller.ReservaController;
+import modelo.Reserva;
 
 @SuppressWarnings("serial")
 public class ReservasView extends JFrame {
@@ -148,11 +148,11 @@ public class ReservasView extends JFrame {
 		txtDataS.setBorder(new LineBorder(new Color(255, 255, 255), 0));
 		txtDataS.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				ReservaDAO reservaDAO = new ReservaDAO();
+				ReservaController reservaController = new ReservaController();
 				if (txtDataS.getDate() != null && txtDataE.getDate() != null) {
 					String dataEntrada = new SimpleDateFormat("dd/MM/yyyy").format(txtDataE.getDate());
 					String dataSaida = new SimpleDateFormat("dd/MM/yyyy").format(txtDataS.getDate());
-					double valorCalculado = reservaDAO.valor(dataEntrada, dataSaida);
+					double valorCalculado = reservaController.valor(dataEntrada, dataSaida);
 
 					String valorExibido = String.valueOf(valorCalculado);
 
@@ -308,20 +308,18 @@ public class ReservasView extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (ReservasView.txtDataE.getDate() != null && ReservasView.txtDataS.getDate() != null) {
-					try (Connection connection = new ConnectionFactory().stringConexao()) {
-						ReservaDAO reserva = new ReservaDAO(connection);
-						String dataEntrada = new SimpleDateFormat("dd/MM/yyyy").format(txtDataE.getDate());
-						String dataSaida = new SimpleDateFormat("dd/MM/yyyy").format(txtDataS.getDate());
-						int idReserva = reserva.inserirReserva(dataEntrada, dataSaida, txtValor.getText(),
-								txtFormaPagamento.getSelectedItem().toString());
+					ReservaController reservaController = new ReservaController();
+					String dataEntrada = new SimpleDateFormat("dd/MM/yyyy").format(txtDataE.getDate());
+					String dataSaida = new SimpleDateFormat("dd/MM/yyyy").format(txtDataS.getDate());
+					double valor = Double.parseDouble(txtValor.getText());
+					Reserva reserva = new Reserva(dataEntrada, dataSaida, BigDecimal.valueOf(valor),
+							txtFormaPagamento.getSelectedItem().toString());
 
-						ReservasView reservaView = new ReservasView();
-						reservaView.passaId(idReserva);
-						dispose();
-					} catch (Exception ex) {
-						throw new RuntimeException(ex);
-					}
+					int idReserva = reservaController.inserirReserva(reserva);
 
+					ReservasView reservaView = new ReservasView();
+					reservaView.passaId(idReserva);
+					dispose();
 				} else {
 					JOptionPane.showMessageDialog(null, "Deve preencher todos os campos.");
 				}

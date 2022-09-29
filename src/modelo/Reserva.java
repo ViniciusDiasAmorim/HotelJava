@@ -8,13 +8,29 @@ public class Reserva {
 	private String dataSaida;
 	private BigDecimal valor;
 	private String formaPagamento;
-	
+
 	public Reserva(int id, String dataEntrada, String dataSaida, BigDecimal valor, String formaPagamento) {
 		super();
 		this.id = id;
 		this.dataEntrada = dataEntrada;
 		this.dataSaida = dataSaida;
 		this.valor = valor;
+		this.formaPagamento = formaPagamento;
+	}
+
+	public Reserva(String dataEntrada, String dataSaida, BigDecimal valor, String formaPagamento) {
+		super();
+		this.dataEntrada = dataEntrada;
+		this.dataSaida = dataSaida;
+		this.valor = valor;
+		this.formaPagamento = formaPagamento;
+	}
+
+	public Reserva(int id, String dataEntrada, String dataSaida, String formaPagamento) {
+		super();
+		this.id = id;
+		this.dataEntrada = dataEntrada;
+		this.dataSaida = dataSaida;
 		this.formaPagamento = formaPagamento;
 	}
 
@@ -57,5 +73,5 @@ public class Reserva {
 	public void setFormaPagamento(String formaPagamento) {
 		this.formaPagamento = formaPagamento;
 	}
-	
+
 }

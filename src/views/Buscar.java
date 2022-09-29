@@ -1,38 +1,31 @@
 package views;
 
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.xml.stream.events.StartElement;
-
-import dao.HospedeDAO;
-import dao.ReservaDAO;
-import factory.ConnectionFactory;
-import modelo.Hospede;
-import modelo.Reserva;
-
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.management.RuntimeErrorException;
-import javax.swing.ImageIcon;
 import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JTabbedPane;
-import java.awt.Toolkit;
-import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-import javax.swing.ListSelectionModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.sql.Connection;
-import java.util.Iterator;
 import java.util.List;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import controller.HospedeController;
+import controller.ReservaController;
+import modelo.Hospede;
+import modelo.Reserva;
 
 @SuppressWarnings("serial")
 public class Buscar extends JFrame {
@@ -130,37 +123,34 @@ public class Buscar extends JFrame {
 		modelo.addColumn("Forma de Pago");
 		String[] colunaReserva = { "Numero de Reserva", "Data Check In", "Data Check Out", "Valor", "Forma de Pago" };
 		modelo.addRow(colunaReserva);
-		try (Connection connection = new ConnectionFactory().stringConexao()) {
-			ReservaDAO reserva = new ReservaDAO(connection);
-			List<Reserva> reservas = reserva.listaReservas();
 
-			HospedeDAO hospede = new HospedeDAO(connection);
-			List<Hospede> hospedes = hospede.listarHospede();
+		ReservaController reservaController = new ReservaController();
+		List<Reserva> reservas = reservaController.listarReservas();
 
-			for (Reserva r : reservas) {
-				Object[] objetos = new Object[5];
-				objetos[0] = r.getId();
-				objetos[1] = r.getDataEntrada();
-				objetos[2] = r.getDataSaida();
-				objetos[3] = r.getValor();
-				objetos[4] = r.getFormaPagamento();
+		HospedeController hospedeController = new HospedeController();
+		List<Hospede> hospedes = hospedeController.listarHospede();
 
-				modelo.addRow(objetos);
-			}
+		for (Reserva r : reservas) {
+			Object[] campos = new Object[5];
+			campos[0] = r.getId();
+			campos[1] = r.getDataEntrada();
+			campos[2] = r.getDataSaida();
+			campos[3] = r.getValor();
+			campos[4] = r.getFormaPagamento();
 
-			for (Hospede h : hospedes) {
-				Object[] objetos = new Object[7];
-				objetos[0] = h.getId();
-				objetos[1] = h.getNome();
-				objetos[2] = h.getSobrenome();
-				objetos[3] = h.getDataNascimento();
-				objetos[4] = h.getNacionalidade();
-				objetos[5] = h.getTelefone();
-				objetos[6] = h.getIdReserva();
-				modeloHospedes.addRow(objetos);
-			}
-		} catch (Exception e) {
-			throw new RuntimeException(e);
+			modelo.addRow(campos);
+		}
+
+		for (Hospede h : hospedes) {
+			Object[] campos = new Object[7];
+			campos[0] = h.getId();
+			campos[1] = h.getNome();
+			campos[2] = h.getSobrenome();
+			campos[3] = h.getDataNascimento();
+			campos[4] = h.getNacionalidade();
+			campos[5] = h.getTelefone();
+			campos[6] = h.getIdReserva();
+			modeloHospedes.addRow(campos);
 		}
 
 		JPanel header = new JPanel();
@@ -261,25 +251,21 @@ public class Buscar extends JFrame {
 				while (modeloHospedes.getRowCount() > 1) {
 					modeloHospedes.removeRow(1);
 				}
-				try (Connection connection = new ConnectionFactory().stringConexao()) {
-					HospedeDAO hospede = new HospedeDAO(connection);
-					List<Hospede> hospedes = hospede.filtrar(txtBuscar.getText());
+				HospedeController hospedeController = new HospedeController();
+				List<Hospede> hospedes = hospedeController.filtrar(txtBuscar.getText());
 
-					for (Hospede h : hospedes) {
-						Object[] objetos = new Object[7];
-						objetos[0] = h.getId();
-						objetos[1] = h.getNome();
-						objetos[2] = h.getSobrenome();
-						objetos[3] = h.getDataNascimento();
-						objetos[4] = h.getNacionalidade();
-						objetos[5] = h.getTelefone();
-						objetos[6] = h.getIdReserva();
+				for (Hospede h : hospedes) {
 
-						modeloHospedes.addRow(objetos);
-					}
+					Object[] objetos = new Object[7];
+					objetos[0] = h.getId();
+					objetos[1] = h.getNome();
+					objetos[2] = h.getSobrenome();
+					objetos[3] = h.getDataNascimento();
+					objetos[4] = h.getNacionalidade();
+					objetos[5] = h.getTelefone();
+					objetos[6] = h.getIdReserva();
 
-				} catch (Exception ex) {
-					throw new RuntimeException(ex);
+					modeloHospedes.addRow(objetos);
 				}
 			}
 		});
@@ -307,6 +293,7 @@ public class Buscar extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int selecionaLinha = tbHospedes.getSelectedRow();
 				String[] objetosColuna = new String[7];
+
 				if (selecionaLinha != -1) {
 					for (int i = 0; i < tbHospedes.getColumnCount(); i++) {
 						objetosColuna[i] = modeloHospedes.getValueAt(selecionaLinha, i).toString();
@@ -315,18 +302,18 @@ public class Buscar extends JFrame {
 					int confirmacao = JOptionPane.showConfirmDialog(null, "Realmente deseja Editar o campo?");
 
 					if (confirmacao == 0) {
-						try (Connection connection = new ConnectionFactory().stringConexao()) {
-							HospedeDAO hospede = new HospedeDAO(connection);
-							hospede.editar(Integer.parseInt(objetosColuna[0]), objetosColuna[1], objetosColuna[2],
-									objetosColuna[3], objetosColuna[4], objetosColuna[5],
-									Integer.parseInt(objetosColuna[6]));
-							Buscar buscar = new Buscar();
-							buscar.setVisible(true);
-							dispose();
+						HospedeController hospedeController = new HospedeController();
 
-						} catch (Exception ex) {
-							throw new RuntimeException(ex);
-						}
+						Hospede hospede = new Hospede(Integer.parseInt(objetosColuna[0]), objetosColuna[1],
+								objetosColuna[2], objetosColuna[3], objetosColuna[4], objetosColuna[5],
+								Integer.parseInt(objetosColuna[6]));
+
+						hospedeController.editar(hospede);
+
+						Buscar buscar = new Buscar();
+						buscar.setVisible(true);
+						dispose();
+
 					} else {
 						Buscar buscar = new Buscar();
 						buscar.setVisible(true);
@@ -342,16 +329,20 @@ public class Buscar extends JFrame {
 
 					int confirmacaoReserva = JOptionPane.showConfirmDialog(null, "Realmente deseja Editar o campo?");
 					if (confirmacaoReserva == 0) {
-						try (Connection connection = new ConnectionFactory().stringConexao()) {
-							ReservaDAO reserva = new ReservaDAO(connection);
-							reserva.editar(Integer.parseInt(valorDaColunaReserva[0]), valorDaColunaReserva[1],
-									valorDaColunaReserva[2], valorDaColunaReserva[3]);
-							Buscar buscar = new Buscar();
-							buscar.setVisible(true);
-							dispose();
-						} catch (Exception ex) {
-							throw new RuntimeException(ex);
-						}
+
+						ReservaController reservaController = new ReservaController();
+						int id = Integer.parseInt(valorDaColunaReserva[0]);
+						String dataEntrada = valorDaColunaReserva[1];
+						String dataSaida = valorDaColunaReserva[2];
+						String formaPagamento = valorDaColunaReserva[4];
+
+						Reserva reserva = new Reserva(id, dataEntrada, dataSaida, formaPagamento);
+
+						reservaController.editar(reserva);
+						Buscar buscar = new Buscar();
+						buscar.setVisible(true);
+						dispose();
+
 					} else {
 						Buscar buscar = new Buscar();
 						buscar.setVisible(true);
@@ -385,17 +376,11 @@ public class Buscar extends JFrame {
 
 					int confirmacaoHospede = JOptionPane.showConfirmDialog(null, "Realmente deseja Excluir o campo?");
 					if (confirmacaoHospede == 0) {
-						try (Connection connection = new ConnectionFactory().stringConexao()) {
-
-							HospedeDAO hospede = new HospedeDAO(connection);
-							hospede.deletar(idHospede);
-							Buscar buscar = new Buscar();
-							buscar.setVisible(true);
-							dispose();
-
-						} catch (Exception ex) {
-							throw new RuntimeException(ex);
-						}
+						HospedeController hospedeController = new HospedeController();
+						hospedeController.deletar(idHospede);
+						Buscar buscar = new Buscar();
+						buscar.setVisible(true);
+						dispose();
 					}
 				}
 				int selecionaLinhaReserva = tbReservas.getSelectedRow();
@@ -403,17 +388,13 @@ public class Buscar extends JFrame {
 				if (selecionaLinhaReserva != -1 && selecionaLinhaReserva != 0) {
 					int idReserva = Integer.parseInt(tbReservas.getValueAt(selecionaLinhaReserva, 0).toString());
 					int confirmacaoReserva = JOptionPane.showConfirmDialog(null, "Realmente deseja Excluir o campo?");
-					if (confirmacaoReserva == 0) {
-						try (Connection connection = new ConnectionFactory().stringConexao()) {
-							ReservaDAO reserva = new ReservaDAO(connection);
-							reserva.deletar(idReserva);
-							Buscar buscar = new Buscar();
-							buscar.setVisible(true);
-							dispose();
 
-						} catch (Exception ex) {
-							throw new RuntimeException(ex);
-						}
+					if (confirmacaoReserva == 0) {
+						ReservaController reservaController = new ReservaController();
+						reservaController.deletar(idReserva);
+						Buscar buscar = new Buscar();
+						buscar.setVisible(true);
+						dispose();
 					}
 				}
 

@@ -7,7 +7,6 @@ import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.sql.Connection;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 
@@ -24,8 +23,8 @@ import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JDateChooser;
 
-import dao.HospedeDAO;
-import factory.ConnectionFactory;
+import controller.HospedeController;
+import modelo.Hospede;
 
 @SuppressWarnings("serial")
 public class RegistroHospede extends JFrame {
@@ -315,19 +314,18 @@ public class RegistroHospede extends JFrame {
 		btnsalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try (Connection connection = new ConnectionFactory().stringConexao()) {
-					HospedeDAO hospede = new HospedeDAO(connection);
-					String dataNas = new SimpleDateFormat("dd/MM/yyyy").format(txtDataN.getDate());
-					int idReserva = Integer.parseInt(txtNreserva.getText());
-					hospede.inserirHospede(txtNome.getText(), txtSobrenome.getText(), dataNas,
-							txtNacionalidade.getSelectedItem().toString(), txtTelefone.getText(), idReserva);
 
-					Sucesso sucesso = new Sucesso();
-					sucesso.setVisible(true);
-					dispose();
-				} catch (Exception ex) {
-					throw new RuntimeException(ex);
-				}
+				String dataNas = new SimpleDateFormat("dd/MM/yyyy").format(txtDataN.getDate());
+				int idReserva = Integer.parseInt(txtNreserva.getText());
+
+				Hospede hospede = new Hospede(txtNome.getText(), txtSobrenome.getText(), dataNas,
+						txtNacionalidade.getSelectedItem().toString(), txtTelefone.getText(), idReserva);
+
+				HospedeController hospedeController = new HospedeController();
+				hospedeController.inserirHospede(hospede);
+				Sucesso sucesso = new Sucesso();
+				sucesso.setVisible(true);
+				dispose();
 			}
 		});
 		btnsalvar.setLayout(null);

@@ -9,7 +9,17 @@ public class Hospede {
 	private String telefone;
 	private int idReserva;
 	
-	public Hospede(int id, String nome, String sobrenome, String dataNascimento, String nacionalidade, String telefone,
+	public Hospede(String nome, String sobrenome, String dataNascimento, String nacionalidade, String telefone,
+			int idReserva) {
+		super();
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.dataNascimento = dataNascimento;
+		this.nacionalidade = nacionalidade;
+		this.telefone = telefone;
+		this.idReserva = idReserva;
+	}
+	public Hospede(int id,String nome, String sobrenome, String dataNascimento, String nacionalidade, String telefone,
 			int idReserva) {
 		super();
 		this.id = id;
