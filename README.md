@@ -2,7 +2,7 @@
 
 ## Sobre o projeto
 
-- Este projeto foi criado para o Challenger do Programa ONE. A o Hotel Java consiste em uma aplicação Desktop construída com Java utilizando a interface gráfica Swing, com uma conexão com banco de dados Mysql para realizar operações CRUD através da aplicação.
+- Este projeto foi criado para o Challenge do Programa ONE. A o Hotel Java consiste em uma aplicação Desktop construída com Java utilizando a interface gráfica Swing, com uma conexão com banco de dados Mysql para realizar operações CRUD através da aplicação.
 
 
 ## Relação das Tabelas do Banco de Dados
